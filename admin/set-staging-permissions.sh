@@ -1,30 +1,27 @@
 #################
-# set-staging-permissions.remote.sh
+# set-staging-permissions.sh
 # 
 #
 # Run this script only as input to a remote ssh session
 #
 # Sets Permissions on remote site
 # Usage:
-# ssh me@example.com "bash -s" < "./set-staging-permissions.remote.sh"
+# "cat ${DIR%%/}/config-bash.conf ${DIR%%/}/set-staging-permissions.sh |ssh ${SSH_CONNECTION} bash -s"
 # @author <andrew@nomstock.com>
 #################
 
 ##config
-## you can't include the config-bash.sh file here since it won't be found on remote server
-STAGE_DIR_PATH=~/stage; #start with tilde,no trailing slash
-HTML_DIRNAME=public_html #name only , no path, e.g.: public_html
-PROD_DIR_PATH=~; #tilde only, no trailing slash
+## you can't include the config-bash.conf file here since it won't be found on remote server. Instead include it before you call it
+
+
 
 echo '#############################';
 
-## Test Concatenation of paths here
-# dir "${STAGE_DIR_PATH%%/}/${HTML_DIRNAME}/"; #test
-# dir "${STAGE_DIR_PATH%%/}/"; #test
 
 
+echo 'HTML_DIRNAME=' ${HTML_DIRNAME};
 echo '##### Locking Down Staging Permissions ######';
-echo '...'
+
 ##staging
 chmod 600  "${STAGE_DIR_PATH%%/}/${HTML_DIRNAME}/wp-config.php"
 chmod 600  "${STAGE_DIR_PATH%%/}/config/wp-config.php"

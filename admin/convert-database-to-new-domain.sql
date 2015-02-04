@@ -2,24 +2,13 @@
 -- ##############################################################################################
 -- ##############################################################################################
 -- ###################################################
--- #########  Convert To Live
+-- #########  Convert Dev To Stage
 -- ###########################################
--- #########  Use this file to convert a live WordPress database to a Dev one
+-- #########  Use this file to convert a Dev WordPress database to a Stage one
 -- ##############################################################################################
 -- ##############################################################################################
 
 -- Note you cannot use variables with the USE statement or anything else that expects an identifier
-
-
-
--- ###########################################
--- ######### CONFIG
--- ###########################################
-use `gscape_wp`;
-SET @DOMAIN_LIVE='glandscapedesign.com';
-SET @DOMAIN_DEV='glandscapedesign-dev.com';
-SET @ROOT_PATH_LIVE='/home/gscape/public_html/glandscapedesign.com';
-SET @ROOT_PATH_DEV='E:/users/dev_cygwin/cygwin/home/adruff/wamp-www/clients/glandscapedesign.com/website/public_html';
 
 
 -- optional : to test , surround with START TRANSACTION and ROLLBACK
@@ -33,14 +22,14 @@ SET @ROOT_PATH_DEV='E:/users/dev_cygwin/cygwin/home/adruff/wamp-www/clients/glan
 -- ###########################################
 
 
-UPDATE wp_options set option_value = replace(option_value, @DOMAIN_DEV, @DOMAIN_LIVE);
-UPDATE wp_postmeta set meta_value = replace(meta_value,  @DOMAIN_DEV, @DOMAIN_LIVE);
+UPDATE wp_options set option_value = replace(option_value, @DOMAIN_SEARCH, @DOMAIN_REPLACE);
+UPDATE wp_postmeta set meta_value = replace(meta_value,  @DOMAIN_SEARCH, @DOMAIN_REPLACE);
 
 -- Guids should not be changed or may cause feedreaders to re-display content.
--- uncomment only if this is used for dev/live or live/dev.
+-- uncomment only if this is used for dev/stage or stage/dev.
 -- see http://codex.wordpress.org/Changing_The_Site_URL#Important_GUID_Note
--- UPDATE wp_posts set guid = replace(guid, @DOMAIN_DEV, @DOMAIN_LIVE);
-UPDATE wp_posts set post_content = replace(post_content,  @DOMAIN_DEV, @DOMAIN_LIVE);
+-- UPDATE wp_posts set guid = replace(guid, @DOMAIN_SEARCH, @DOMAIN_REPLACE);
+UPDATE wp_posts set post_content = replace(post_content,  @DOMAIN_SEARCH, @DOMAIN_REPLACE);
 
 -- use nomstock_wp_dev;UPDATE wp_posts set post_name = replace(post_name, @SEARCHFOR, @REPLACEWITH);
 
@@ -49,7 +38,7 @@ UPDATE wp_posts set post_content = replace(post_content,  @DOMAIN_DEV, @DOMAIN_L
 -- ######### Root Path
 -- ###########################################
 
-UPDATE wp_options set option_value = replace(option_value, @ROOT_PATH_DEV, @ROOT_PATH_LIVE);
+UPDATE wp_options set option_value = replace(option_value, @ROOT_PATH_SEARCH, @ROOT_PATH_REPLACE);
 
 -- ###########################################
 -- ######### Content Links
