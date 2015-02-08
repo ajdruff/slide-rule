@@ -1,0 +1,58 @@
+#############################
+#  Dev
+# .htaccess for /public_html/ 
+# 
+##############################
+
+# required to prevent redirects when order/deny rules are added http://wordpress.stackexchange.com/a/130243
+# Redirect Loops in wp-admin : is expected to happen if you dont have access to that folder or dont have the ErrorDocument 401 default line
+# grant yourself access both with file permissions (644) and by excepting your IP Address. Be sure the order is deny,allow not allow,deny
+ErrorDocument 401 default
+
+#############################
+#  xmlrpc and wp-config
+# ref: https://www.ndchost.com/wiki/wordpress/how-to-harden-wordpress-security
+##############################
+
+<files wp-config.php>
+order allow,deny
+allow from 127.0.0.1
+deny from all
+</files>
+
+<files xmlrpc.php>
+order allow,deny
+allow from 127.0.0.1
+deny from all
+</files>
+
+#############################
+#  admin-ajax.php
+# ref: https://www.ndchost.com/wiki/wordpress/how-to-harden-wordpress-security
+##############################
+<files admin-ajax.php>
+order allow,deny
+allow from 127.0.0.1
+deny from all
+</files>
+
+#############################
+#  Prevent Indexes
+# ref: https://www.ndchost.com/wiki/wordpress/how-to-harden-wordpress-security
+##############################
+Options -Indexes
+
+
+
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress

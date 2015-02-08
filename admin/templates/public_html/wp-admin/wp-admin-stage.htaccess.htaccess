@@ -1,0 +1,36 @@
+#############################
+#
+# .htaccess for /stage/public_html/stage 
+# 
+##############################
+
+
+
+
+#############################
+#
+# Access to admin-ajax.php
+# 
+##############################
+
+<files admin-ajax.php>
+order allow,deny
+allow from 127.0.0.1
+deny from all
+</files>
+
+# deny access from all access while in staging
+deny from all
+
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
