@@ -27,7 +27,7 @@ DIR_PARENT=$(dirname $DIR)
 #read common variables for all bash scripts
 source "${DIR%%/}/config-bash.conf";
 
-#git remote add origin ssh://gscape@174.36.179.67/home/gscape/.git
+#git remote add origin ssh://user@example.com/home/username/.git
 cd ${LOCAL_DEPO_PATH}
 
 git clone ssh://${SSH_CONNECTION}${PROD_DIR_PATH}/.git ${LOCAL_DEPO_PATH}/

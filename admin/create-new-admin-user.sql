@@ -1,4 +1,3 @@
-use `clients_glandscapedesign_wp`;
 set @USER_ID=1000;
 SET @USER_LOGIN='apergy_admin';
 SET @USER_PASS='22Rza*#pfLZHLGNo';

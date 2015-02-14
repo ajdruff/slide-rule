@@ -1,16 +1,16 @@
 #!/usr/bin/bash
 
 #################
-# load-staging-database-with-dev.sh
+# template-bash-script.sh
 #
 #
-# Overwrites the Staging Database with the Dev Database 
+# Description
 #
 #  Usage:
-# ./load-staging-database-with-dev.sh
+# ./template-bash-script.sh
 #
 #
-# @author <andrew@nomstock.com>
+# @author <user@example.com>
 #
 #################
  
