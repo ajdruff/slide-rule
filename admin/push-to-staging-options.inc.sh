@@ -85,12 +85,12 @@ if [[ "${DEST_DATABASE_IS_REMOTE}" == true ]]; then
 
 echo 'MySQL connecting to destination database over SSH tunnel';
 
-command="(echo 'use ${DEST_DB_NAME};'; cat ${IMPORT_OPTIONS_QUERY_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database-to-new-domain.sql )| mysql --defaults-file=${DEST_DEFAULTS_FILE} -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1";
+command="(echo 'use ${DEST_DB_NAME};'; cat ${IMPORT_OPTIONS_QUERY_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/fix-domain.sql )| mysql --defaults-file=${DEST_DEFAULTS_FILE} -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1";
 
 else
 echo 'MySQL connecting to destination database over local connection';
 
-command="(echo 'use ${DEST_DB_NAME};'; cat ${IMPORT_OPTIONS_QUERY_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database-to-new-domain.sql )| mysql --defaults-file=${DEST_DEFAULTS_FILE}";
+command="(echo 'use ${DEST_DB_NAME};'; cat ${IMPORT_OPTIONS_QUERY_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/fix-domain.sql )| mysql --defaults-file=${DEST_DEFAULTS_FILE}";
 
 
 fi
