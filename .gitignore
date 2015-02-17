@@ -1,4 +1,9 @@
+/adhoc/download-missing-files.sh
+/admin/scrap.sql
 temp
-admin/sandbox.sql
-download-missing-files.sh
-adhoc/maintain-sample.sql
+temp-testing
+wp_live-glandscapedesign-backup.sql
+wp_dev.sql
+wp_dev-example-client.sql
+wp_dev-live-old.sql
+wp_live.sql
