@@ -1,12 +1,12 @@
 #!/usr/bin/bash
 
 #################
-# load-staging-database.inc.sh
+# push-database.inc.sh
 #
 #
-# Loads Staging Database with New Data
+# Replaces Destination Database with Source Database Data
 #
-# Never use standalone - always include in a another bash file - see load-staging-database-with-live/dev.sh for an example
+# Never use standalone - always include in a another bash file 
 #
 #
 # @author <andrew@nomstock.com>
@@ -61,10 +61,10 @@ eval $command;
 
 ########################
 #
-# Update Stage
+# Update Destination Database
 #
 ########################
-echo "Updating Staging Database";
+echo "Updating ${DEST_DB_NAME} Database";
 
 #pipe different sql files to the mysql command, which will run them against the local port, which is being forwarded to the remote port
 cd "${DIR%%/}"; 
@@ -72,10 +72,10 @@ if [[ "${DEST_DATABASE_IS_REMOTE}" == true ]]; then
 
 echo 'MySQL connecting to destination database over SSH tunnel';
 
-command="cat ${SOURCE_BACKUP_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database-to-new-domain.sql | mysql --defaults-file=${DEST_DEFAULTS_FILE} -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1 --database=${DEST_DB_NAME};rm -r ${SOURCE_BACKUP_FILE}";
+command="cat ${SOURCE_BACKUP_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database.sql | mysql --defaults-file=${DEST_DEFAULTS_FILE} -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1 --database=${DEST_DB_NAME};rm -r ${SOURCE_BACKUP_FILE}";
 else
 echo 'MySQL connecting to destination database over local connection';
-command="cat ${SOURCE_BACKUP_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database-to-new-domain.sql | mysql --defaults-file=${DEST_DEFAULTS_FILE} --database=${DEST_DB_NAME};rm -r ${SOURCE_BACKUP_FILE}";
+command="cat ${SOURCE_BACKUP_FILE} ${SQL_SETTINGS_FILE} ${SQL_CONVERSION_FILE} ${DIR%%/}/convert-database.sql | mysql --defaults-file=${DEST_DEFAULTS_FILE} --database=${DEST_DB_NAME};rm -r ${SOURCE_BACKUP_FILE}";
 
 fi
 
@@ -83,4 +83,4 @@ fi
 eval $command;
 
 
-echo "Staging database has been updated";
+echo "${DEST_DB_NAME} database has been updated";
