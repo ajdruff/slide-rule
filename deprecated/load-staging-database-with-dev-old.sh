@@ -66,7 +66,7 @@ echo "Replacing Staging Database with Dev Database, and then running the convert
 
 #pipe different sql files to the mysql command, which will run them against the local port, which is being forwarded to the remote port
 cd "${DIR%%/}"; 
-command="cat ${DIR_PARENT%%/}/temp/wp_dev.sql ${DIR%%/}/config-sql.sql ${DIR%%/}/convert-dev-to-stage.sql ${DIR%%/}/convert-database-to-new-domain.sql | mysql --defaults-file=config-mysql-stage.conf -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1 --database=${STAGE_DB_NAME};rm -r ${DIR_PARENT%%/}/temp/wp_dev.sql";
+command="cat ${DIR_PARENT%%/}/temp/wp_dev.sql ${DIR%%/}/config-sql.sql ${DIR%%/}/convert-dev-to-stage.sql ${DIR%%/}/convert-database.sql | mysql --defaults-file=config-mysql-stage.conf -P ${LOCAL_SSH_FORWARDING_PORT}  -h 127.0.0.1 --database=${STAGE_DB_NAME};rm -r ${DIR_PARENT%%/}/temp/wp_dev.sql";
 #echo "command  = $command";
 eval $command;
 
