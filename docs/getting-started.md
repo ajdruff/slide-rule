@@ -1,5 +1,23 @@
 #Getting Started With Slide Rule
 
+#Initial Prep
+
+make a complete backup of the live site if currently in production. 
+place it in maintenance mode
+check for a git install, if there is one, clone it local and back it entirely up since we will be replacing it.
+
+make a copy of the example.com folder
+place it in wamp/www/clients
+configure slide-rule
+pull on both bplate_wp and slide-rule to update their files
+delete the bplate-wp .git since we are going to replace it with a local repo of the site
+configure 
+setup the databases
+setup the remote repo.
+setup the local repo
+if this is an existing site, replace wp-content with the wp-content from the existing site
+
+
 
 #configuration
 
@@ -80,6 +98,7 @@ You may have to run `create-new-admin-user.sql` within netbeans to create a new 
 #Install Live Database
 
 
+
 **option 1 - start from scratch**
 
 Normally, you would only do this if you didn't yet have a dev database ready to be published. 
@@ -143,4 +162,8 @@ Passwords: To login to admin, if you don't have the admin password, create your 
 You may have to run `create-new-admin-user.sql` within netbeans to create a new admin user.
 
     #login and reset the theme if necessary
+
+
+
+#Install WordPress Files
 
