@@ -32,8 +32,9 @@ cd ${LOCAL_DEPO_PATH}
 
 git clone ssh://${SSH_CONNECTION}${PROD_DIR_PATH}/.git ${LOCAL_DEPO_PATH}/
 
+
 #copy the template into the repo directory
-cp  -R ${LOCAL_DEPO_PATH}/../site-template/* ${LOCAL_DEPO_PATH}/
+cp  -R ${SITE_TEMPLATE_PATH}/* ${LOCAL_DEPO_PATH}/
 
 git add .
 
