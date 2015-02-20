@@ -28,12 +28,14 @@ DIR_PARENT=$(dirname $DIR)
 source "${DIR%%/}/config-bash.conf";
 
 #git remote add origin ssh://user@example.com/home/username/.git
-cd ${LOCAL_DEPO_PATH}
+cd ${LOCAL_REPO_PATH}
 
-git clone ssh://${SSH_CONNECTION}${PROD_DIR_PATH}/.git ${LOCAL_DEPO_PATH}/
+git clone ssh://${SSH_CONNECTION}${LIVE_DIR_PATH}/.git ${LOCAL_REPO_PATH}/
 
-#copy the template into the repo directory
-cp  -R ${LOCAL_DEPO_PATH}/../site-template/* ${LOCAL_DEPO_PATH}/
+
+#copy the web template into the repo directory
+command "${DIR%%/}/setup-home.sh;
+
 
 git add .
 
