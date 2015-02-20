@@ -47,4 +47,4 @@ DEST_DB_NAME="${STAGE_DB_NAME}";
 
 
 # core code
-source "${DIR%%/}/push-to-staging-options.inc.sh";
+source "${DIR%%/}/push-options-dev-to-stage.inc.sh";
