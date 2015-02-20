@@ -1,6 +1,19 @@
 #Getting Started With Slide Rule
 
-#Initial Prep
+#Assumptions/Cautions
+If backup site is in git repository, be sure to make a copy of the entire repo, and 'clone' the repo so you have a complete backup. 
+
+This procedure assumes you do NOT have a git repo on the remote site, since we'll be creating our own, so if there is one, create a complete backup before proceeding, then delete it.
+
+
+#Tips
+
+* If you are getting lost in what you are trying to do, focus on this : 
+* Setup the local WAMP site first, then push to the live and staging sites. The dev site should always come first
+
+
+
+#Overview (Broad Outline)
 
 make a complete backup of the live site if currently in production. 
 place it in maintenance mode
@@ -17,12 +30,62 @@ setup the remote repo.
 setup the local repo
 if this is an existing site, replace wp-content with the wp-content from the existing site
 
+#Backup Live Site
+
+make or obtain a complete backup of the live site if currently in production
+
+including database and all files
 
 
-#configuration
+
+
+##Create the Dev WAMP Folder
+
+1. create a folder c:/wamp/www/clients/mynewsite.com and open it up in windows explorer
+2. clone git@github.com:simpliwp/slide-rule.git  into it. when clone is finished you should have `mynewsite.com/slide-rule`
+3. clone git@github.com:simpliwp/bplate-wp.git . when clone is finished you should have `mynewsite.com\bplate-wp`
+4. delete the .git directory in both directories 
+5. rename the bplate-wp directory 'home'
+
+If starting from a template ( a template is just a folder you setup using the proceeding steps but without deleting the .git directories.):
+ 1.copy the template and rename it mynewsite.com
+ 2. pull from master to update both git repos
+ 3. delete .git directories once you are done updating
+
+If you plan on making changes to slide-rule, don't delet its .git directory and instead checkout a new branch 'branch-mysite.com'
+
+
+create a netbeans project with existing sources and add the folders form the folde ryou just created.
+
+
+#Configure 
+
+
+At a minimum, edit admin/config-bash.conf,config-mysql-live/dev/stage.conf for your installation.
+
 
 Always add windows paths like this : c:/path/to/something/on/windows.
 never like this : c:\path\to\... or c:\\path\\to\\...
+
+#setup local WAMP Server
+
+
+server name: example-dev.com
+document root: C:\wamp\www\clients\gexample.com\home\public_html
+
+
+#setup repos
+
+after configuration, and removal of the .git directory in home, run the following:
+
+
+    #setup remote repo
+    admin/setup-repo-remote.sh
+
+
+
+
+
 
 
 
