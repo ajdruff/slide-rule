@@ -1,13 +1,11 @@
 #!/usr/bin/bash
 
 #################
-# push-to-stage-files.sh
+# push-files-dev-to-stage.sh
 #
 #
-# Uses Rsync to Push Dev files to the remote site
+# Uses Rsync to Push Dev files to Staging area
 #
-#  Usage:
-# ./push-to-stage.sh
 #################
 
 
@@ -45,7 +43,7 @@ fi
 ########################
 
 
-command="rsync  -azvH --delete  ${dry_run_option} ${DIR_PARENT%%/}/${HTML_DIRNAME}  -e ssh ${SSH_CONNECTION}:${STAGE_DIR_PATH}";
+command="rsync  -azvH --delete  ${dry_run_option} ${LOCAL_REPO_PATH%%/}/${HTML_DIRNAME}  -e ssh ${SSH_CONNECTION}:${STAGE_DIR_PATH}";
 
 eval $command;
 
@@ -66,33 +64,22 @@ echo '##############################################';
 fi
 
 #######################
-#
-# Ovewrite .htaccess to /wp-admin/
-########################
-if [[ "${PREVENT_LOGIN}" == true ]]; then 
-command="scp ${DIR%%/}/templates/public_html/wp-admin/wp-admin-stage.htaccess.htaccess ${SSH_CONNECTION}:${STAGE_DIR_PATH}/${HTML_DIRNAME}/wp-admin/.htaccess"
 
-eval  $command;
-fi
-#######################
-#
-# Ovewrite .htaccess
-########################
-if [[ "${PREVENT_LOGIN}" == true ]]; then 
-command="scp ${DIR%%/}/templates/public_html/stage.htaccess ${SSH_CONNECTION}:${STAGE_DIR_PATH}/${HTML_DIRNAME}/.htaccess"
-echo 'prevnting login';
-eval  $command;
-fi
+
+
+#rsync local config
+command="rsync  -azvH   ${dry_run_option} ${LOCAL_REPO_PATH}/_stage/*  -e ssh ${SSH_CONNECTION}:${STAGE_DIR_PATH}";
+#echo $command;
+eval $command;
+
+
 #######################
 #
 # Update Permisssions
 #
 ########################
-command="cat ${DIR%%/}/config-bash.conf ${DIR%%/}/set-staging-permissions.sh |ssh ${SSH_CONNECTION} bash -s"
-
-eval $command;
 
 
-
+command "${DIR%%/}/set-permissions-stage.sh";
 
 #############################
