@@ -8,3 +8,5 @@ wp_dev-example-client.sql
 wp_dev-live-old.sql
 wp_live.sql
 adhoc
+/admin/.archive
+/admin/*.log
