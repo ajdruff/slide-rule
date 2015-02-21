@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 #################
-# push-to-staging-options.inc.sh
+# push-options-dev-to-stage.inc.sh
 #
 #
 # Pushes Select wp_options to Staging Database
