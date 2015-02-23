@@ -1,14 +1,10 @@
 #!/usr/bin/bash
 
 #################
-# convert-database-dev-to-live.sh
+# create-database-dev.sh
 #
 #
-# Converts a Database with a Dev Domain to the Live Domain
-#
-#  Usage:
-# ./convert-database-dev-to-live.sh
-#
+# Creates a database
 #
 # @author <andrew@nomstock.com>
 #
@@ -33,12 +29,10 @@ source "${DIR%%/}/config-bash-advanced.conf";
 
 #config
 
-DEST_DATABASE_IS_REMOTE="${DEV_DATABASE_IS_REMOTE}";
+DEST_DATABASE_IS_REMOTE="${STAGE_DATABASE_IS_REMOTE}";
 
-DEST_DEFAULTS_FILE="${DEV_MYSQL_DEFAULTS_FILE}";#name of mysql --defaults-file containing username and passwords (in the same directory as this file)
+DEST_DEFAULTS_FILE="${STAGE_MYSQL_DEFAULTS_FILE}";#name of mysql --defaults-file containing username and passwords (in the same directory as this file)
 
+DEST_DB_NAME="${STAGE_DB_NAME}";
 
-DEST_DB_NAME="${DEV_DB_NAME}";
-
-
-source "${DIR%%/}/scrub-wp-database.inc.sh";
+source "${DIR%%/}/create-database.inc.sh";

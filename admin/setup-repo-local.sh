@@ -34,7 +34,7 @@ git clone ssh://${SSH_CONNECTION}${LIVE_DIR_PATH}/.git ${LOCAL_REPO_PATH}/
 
 
 #copy the web template into the repo directory
-command "${DIR%%/}/setup-home.sh;
+command "${DIR%%/}/setup-home.sh";
 
 
 git add .

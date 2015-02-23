@@ -1,14 +1,10 @@
 #!/usr/bin/bash
 
 #################
-# load-staging-database-with-live.sh
+# create-database-dev.sh
 #
 #
-# Overwrites the Staging Database with the Live Database 
-#
-#  Usage:
-# ./load-staging-database-with-live.sh
-#
+# Creates a database
 #
 # @author <andrew@nomstock.com>
 #
@@ -33,12 +29,10 @@ source "${DIR%%/}/config-bash-advanced.conf";
 
 #config
 
-
 DEST_DATABASE_IS_REMOTE="${LIVE_DATABASE_IS_REMOTE}";
 
 DEST_DEFAULTS_FILE="${LIVE_MYSQL_DEFAULTS_FILE}";#name of mysql --defaults-file containing username and passwords (in the same directory as this file)
-SOURCE_BACKUP_FILE="${LIVE_BACKUP_FILE}"; #absolute file path to where we stash the source db and where we restore it from
 
 DEST_DB_NAME="${LIVE_DB_NAME}";
 
-source "${DIR%%/}/restore-database.inc.sh";
+source "${DIR%%/}/create-database.inc.sh";
