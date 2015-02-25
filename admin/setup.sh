@@ -24,6 +24,9 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 #get its parent directory pat
 DIR_PARENT=$(dirname $DIR)
 
+eval "setfacl -r -b ${DIR}/";
+eval "find ${DIR}/ -type d -exec chmod 755 {} \;";
+eval "find ${DIR}/ -type f -exec chmod 744 {} \;";
 #remote repo
 command "${DIR%%/}/setup-repo-remote.sh";
 #local repo

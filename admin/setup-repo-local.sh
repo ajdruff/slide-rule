@@ -30,14 +30,19 @@ source "${DIR%%/}/config-bash.conf";
 #git remote add origin ssh://user@example.com/home/username/.git
 cd ${LOCAL_REPO_PATH}
 
+
 git clone ssh://${SSH_CONNECTION}${LIVE_DIR_PATH}/.git ${LOCAL_REPO_PATH}/
 
-
 #copy the web template into the repo directory
-command "${DIR%%/}/setup-home.sh;
+command "${DIR%%/}/setup-home.sh";
 
+cd ${LOCAL_REPO_PATH}
+
+#prevent git from tracking file permission changes.
+#this is important to keep both cygwin and Git for Windows in sync
+git config core.filemode false;
 
 git add .
 
 git commit -a -m 'initial commit'
-git push origin master
+#@git push origin master
