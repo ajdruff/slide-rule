@@ -39,5 +39,5 @@ command="cp  -v ${SITE_TEMPLATE_PATH}/.gitattributes ${LOCAL_REPO_PATH}"
 eval $command;
 
 #make sure the repo ignores the _dev and _live configuration directories
-command="echo -e \"\n_live\n_dev\" >>${LOCAL_REPO_PATH}/.gitignore;"
+command="echo -e \"\n_live\n_stage\" >>${LOCAL_REPO_PATH}/.gitignore;"
 eval $command;
