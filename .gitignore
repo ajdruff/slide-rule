@@ -8,4 +8,6 @@ wp_dev-example-client.sql
 wp_dev-live-old.sql
 wp_live.sql
 adhoc
-/admin/config-bash_2.conf
+/admin/.archive
+/admin/*.log
+/*.log

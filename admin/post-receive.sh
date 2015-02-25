@@ -36,7 +36,7 @@ source "${DIR%%/}/config-bash.conf";
 ##############################
 
 LOGFILE="${DIR%%/}/post-receive.log";
-WORKTREE="${PROD_DIR_PATH}";
+WORKTREE="${LIVE_DIR_PATH}";
 ARCHIVE_BRANCH=LIVE-ARCHIVE-$( date +%Y-%m-%d-%H-%M-%S)
 #############################
 # Initialize
