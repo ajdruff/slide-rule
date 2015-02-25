@@ -10,3 +10,4 @@ wp_live.sql
 adhoc
 /admin/.archive
 /admin/*.log
+/*.log
