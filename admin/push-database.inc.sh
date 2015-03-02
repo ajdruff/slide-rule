@@ -36,11 +36,14 @@ fi
 echo "Making a Copy of Database ${SOURCE_DB_NAME} to ${SOURCE_BACKUP_FILE}" ;
 
 #make sure there is a temp directory to dump to
-#mkdir -p "${DIR_PARENT%%/}/temp";
+temp_dir=$(dirname ${SOURCE_BACKUP_FILE});
+mkdir -p "${temp_dir}";
 
 #change to the current directory
 #this is required since --defaults-file cant take an absolute path without interpreting the path wrong.
 cd "${DIR%%/}"; 
+
+
 
 
 if [[ "${SOURCE_DATABASE_IS_REMOTE}" == true ]]; then 
