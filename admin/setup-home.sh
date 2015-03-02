@@ -24,8 +24,6 @@ DIR_PARENT=$(dirname $DIR)
 source "${DIR%%/}/config-bash.conf";
 
 
-
-
 mkdir -p ${LOCAL_REPO_PATH};
 
 
@@ -41,3 +39,6 @@ eval $command;
 #make sure the repo ignores the _dev and _live configuration directories
 command="echo -e \"\n_live\n_stage\" >>${LOCAL_REPO_PATH}/.gitignore;"
 eval $command;
+
+#run skip worktree script in local repo
+command "${LOCAL_REPO_PATH}/config/git-skip-worktree.sh";
