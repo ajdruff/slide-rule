@@ -27,3 +27,6 @@ command "${DIR%%/}/push-database-dev-to-stage.sh";
 command "${DIR%%/}/push-files-dev-to-stage.sh";
 #configuration file overwrite (must come after push-files)
 command "${DIR%%/}/push-config-stage.sh";
+
+#configuration file overwrite (must come after push-files)
+command "${DIR%%/}/set-permissions-stage.sh";
