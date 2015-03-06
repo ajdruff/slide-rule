@@ -1,12 +1,10 @@
 #!/usr/bin/bash
 
 #################
-# convert-database.inc.sh
+# scrub-wp-database.inc.sh
 #
 #
-# Converts the Domain
-#
-# Never use standalone - always include in a another bash file 
+# Removes WordPress Installation Cruft
 #
 #
 # @author <andrew@nomstock.com>

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 #################
-# scrub-wp-database-dev.sh
+# scrub-wp-database-live.sh
 #
 #
 # Removes WordPress Installation Cruft
@@ -30,12 +30,12 @@ source "${DIR%%/}/config-bash-advanced.conf";
 
 #config
 
-DEST_DATABASE_IS_REMOTE="${DEV_DATABASE_IS_REMOTE}";
+DEST_DATABASE_IS_REMOTE="${LIVE_DATABASE_IS_REMOTE}";
 
-DEST_DEFAULTS_FILE="${DEV_MYSQL_DEFAULTS_FILE}";#name of mysql --defaults-file containing username and passwords (in the same directory as this file)
+DEST_DEFAULTS_FILE="${LIVE_MYSQL_DEFAULTS_FILE}";#name of mysql --defaults-file containing username and passwords (in the same directory as this file)
 
 
-DEST_DB_NAME="${DEV_DB_NAME}";
+DEST_DB_NAME="${LIVE_DB_NAME}";
 
 
 source "${DIR%%/}/scrub-wp-database.inc.sh";
