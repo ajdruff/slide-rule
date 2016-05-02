@@ -52,7 +52,7 @@ If starting from a template ( a template is just a folder you setup using the pr
  2. pull from master to update both git repos
  3. delete .git directories once you are done updating
 
-If you plan on making changes to slide-rule, don't delet its .git directory and instead checkout a new branch 'branch-mysite.com'
+If you plan on making changes to slide-rule, don't delet its .git directory and instead checkout a new branch 'branch-blue.com'
 
 
 create a netbeans project with existing sources and add the folders form the folde ryou just created.
