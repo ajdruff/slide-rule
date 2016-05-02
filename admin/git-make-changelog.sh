@@ -32,7 +32,7 @@ source "${DIR%%/}/config-bash.conf";
 #git log 1.0.0...1.1.1 
 #git log  --pretty=format:'%n* *%cd*  %n%s %n[view commit](http://github.com/simpliwp/downcastwp/commit/%H) ' | grep -v Merge >>changelog.md
 
-git log  --pretty=format:'%n* *%cd*  %n%s %n' | grep -v Merge >>changelog.md
+git log  --pretty=format:'%n* *%cd*  %n%s %n' | grep -v Merge >changelog.md
 
 
 
