@@ -1,14 +1,21 @@
 #!/usr/bin/bash
 
+
 #################
 # backup-all-live.sh
 #
 #
+# Backs up all the files and database of live site
+#
+#  Usage:
+# ./backup-all-live.sh
 #
 #
 # @author <andrew@nomstock.com>
 #
 #################
+
+
  
 
 
