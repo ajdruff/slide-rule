@@ -4,7 +4,7 @@
 # backup-database-dev.sh
 #
 #
-# Backsup the dev database
+# Backs up the Dev database 
 #
 #  Usage:
 # ./backup-database-dev.sh

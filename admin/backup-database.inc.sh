@@ -4,9 +4,8 @@
 # backup-database.inc.sh
 #
 #
-# Replaces Destination Database with Source Database Data
+# Core library for backing up a database to the local directory defined by SOURCE_BACKUP_FILE
 #
-# Never use standalone - always include in a another bash file 
 #
 #
 # @author <andrew@nomstock.com>
