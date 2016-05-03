@@ -52,13 +52,30 @@ If starting from a template ( a template is just a folder you setup using the pr
  2. pull from master to update both git repos
  3. delete .git directories once you are done updating
 
-If you plan on making changes to slide-rule, don't delet its .git directory and instead checkout a new branch 'branch-mysite.com'
+If you plan on making changes to slide-rule, don't delet its .git directory and instead checkout a new branch 'branch-blue.com'
 
 
 create a netbeans project with existing sources and add the folders form the folde ryou just created.
 
 
 #Configure 
+
+
+Configuration files are contained in the 'templates' folder. 
+You must make a copy of all configuration files and place them in the 'admin' folder.
+
+
+1. Copy all files that begin with 'config' to the admin folder
+
+e.g.:
+
+    cp templates/config-* admin/
+    
+This is done so that any configuration changes are not pushed to the local repo since we ignore config files in the admin folder.
+
+Alternately we considered using git-skip-worktree, but this proved cumbersome and can be overwritten if a git branch is reset (such as with a stash)
+
+
 
 
 At a minimum, edit admin/config-bash.conf,config-mysql-live/dev/stage.conf for your installation.

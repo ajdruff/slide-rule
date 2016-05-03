@@ -9,8 +9,9 @@
 #  Usage:
 # ./git-skip-worktree.sh
 #
-#
-# @author <user@example.com>
+# You should never have to use this since we should never be committing any config files that are in the admin folder (they are ignored).
+# Purpose is to prevent any configuration files from being pushed to the central repo, preventing any potential security configuration info to be exposed.
+# @author <andrew@nomstock.com.com>
 #
 #################
  

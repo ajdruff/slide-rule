@@ -4,7 +4,7 @@
 # backup-database-live.sh
 #
 #
-# Backsup the live database
+# Backs up the live database
 #
 #  Usage:
 # ./backup-database-live.sh
