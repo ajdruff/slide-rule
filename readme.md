@@ -48,6 +48,10 @@ Because there can be as many as 3 different web servers involved, an some manual
 The biggest advantage to slide rule is the ability 
 
 
+#Does it work only with WordPress?
+
+Slide Rule basically just copies files to and from web environments, and provides scripts to create and backup databases. Although some scripts are intended to work with a WordPress database (the scrub scripts for example), Slide Rule can work with just about any site that supports bash and ssh.
+
 
 #Netbeans
 
