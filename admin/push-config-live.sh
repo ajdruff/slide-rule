@@ -56,5 +56,5 @@ command="rsync  -azvH   ${dry_run_option} ${LOCAL_REPO_PATH}/_live/*  -e ssh ${S
 eval $command;
 
 #run skip worktree. this ensures that any edits of password files wont be committed.
-command="ssh ${SSH_CONNECTION} sh ${LIVE_DIR_PATH}/config/git-skip-worktree.sh";
+#command="ssh ${SSH_CONNECTION} sh ${LIVE_DIR_PATH}/config/git-skip-worktree.sh";
 eval $command;
