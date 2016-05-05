@@ -1,17 +1,30 @@
 #Slide Rule Readme
 
+Todo:
+
+* split it into the following sections, focusing on each server:
+* Live Server
+* Dev Server
+* Staging Server (Optional)
+* Script Configuration
+* Repo Setup Script
+* (WordPress) Site Configuration
+
+* create a video showing:
+* installation
+* site database migration.
 
 ##What is Slide Rule?
 
-Slide Rule is a set of bash scripts that can be used to manage a development, staging, and live environment for a website. 
+Slide Rule is a set of bash scripts and SQL scripts that can be used to manage source control, publishing, backups, and migrations for a development, staging, and live environment for a website. 
 
-Once set-up, Git is used to check in development changes, and push to the live site.
+Once set-up, Git is used to check in development changes, and push final changes to the live site.
 
 It also provides scripts to automate website backups and migrations between domains.
 
 ##Why is it called Slide Rule? 
 
-A slide rule is a tool to help you solve problems quickly. Its also a play on words in suggesting that the software can rule The first three consonants in the name  represent each different web environments.
+A slide rule is a tool to help you solve problems quickly. Its also a play on words in suggesting that the software can help rule the three different web environments.
 
 S - Staging
 L - Live
