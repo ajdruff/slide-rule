@@ -128,7 +128,7 @@ Create a subdomain. Below is an example of how you do this for cPanel on a share
 
 ##Local Directory Setup
 
-In the directory that  will hold your local dev files(mine is `C:\wamp\www` , do the following:
+In the directory that  will hold your local dev files(mine is `C:\wamp\www`) , do the following:
 
 1. Create a folder with the name of your website, e.g. `C:\wamp\www\ajdruff.com`
 2. Create a subdirectory `home`  , e.g.: `C:\wamp\www\ajdruff.com\home`
@@ -138,12 +138,16 @@ In the directory that  will hold your local dev files(mine is `C:\wamp\www` , do
 
 For this example, we'll clone my bplate-wp project.                
 
+```
+
 wamp
 +---www
     +---example.com
         +---home
         +---slide-rule
         +---site-templates
+
+```
             +---bplate-wp           
 
 
