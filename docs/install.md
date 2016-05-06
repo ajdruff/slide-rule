@@ -1,30 +1,47 @@
 
-#Overview:
+#Intro
 
 The following is a detailed guide on installing 
 [Slide Rule](https://github.com/ajdruff/slide-rule),
 
-1. Create remote site on your Web Host
-2. Create Remote WordPress Database on your Web Host
 
-********** add all the overview steps here ***********
+##Assumptions
 
-The major sections include:
+* *You are starting with a brand new site and do not have  existing files on your production site
+* You are running on a LAMP like environment 
+* Your Live Site is on shared hosting (not required)
+* Your Staging environment is a subdomain of your live site.
+* You've already created a SSH key pair to use for connection to your live site and running scripts.
+
+>*If you are trying to add Slide Rule to an existing site, you must first backup your production files and use them as your website template, placing them in the 'site-templates' folder before running your setup script.
+
+##Installation Overview
+
+Major Installation Steps Include:
 
 * Live Server Setup
-* Dev Server Setup
 * Staging Server Setup (Optional)
+* Dev Server Setup
 * Local Directory Setup
 * Slide Rule Configuration
-* Slide Rule Git Repo Setup
-* (WordPress) Site Configuration
+* Slide Rule Setup Script
+* Configure WordPress (if applicable)
+* Go Live
+* Setup WordPress (if applicable)
+* Create a Netbeans Project (Optional)
+* Troubleshooting
+* Notes
 
 
-#Detailed Steps
 
-##Remote Web Hosting Setup
 
-###Create a new site
+
+##Live Server Setup
+
+
+###Create a new web root for your domain
+
+On your production server, shared hosting account or VPS,  create a new virtual host or standalone web site. 
 
 Below is an example using Web Hosting company Site5.com
 
@@ -33,7 +50,7 @@ Below is an example using Web Hosting company Site5.com
 3. Click 'Create Site'
 4. Enter domain, contact email, username, and password. Place a checkmark for CGi and Shell access.
 
-###Create the WordPress database
+###Create the WordPress database (If applicable)
 
 **Example Using Site 5**
 
@@ -52,7 +69,6 @@ Below is an example using Web Hosting company Site5.com
     2.  Click 'Just Create Database'
     3.  Click 'Assign New User'
     4.  Select the same user used for the live database  
-5. **Development Database**
 
 
 Add the db username, password and database name to the admin/config-mysql-stage/dev/live.conf files.  Note that usually, the same user and password is used for each of the client, mysql,mysqldump and mysqldiff sections.
@@ -67,108 +83,11 @@ To create the database, you can execute the  `create-database` scripts either fr
 
 
 
-##Staging Subdomain
+###SSH Keys
 
-The staging site should reside on the same host as your live site but as a separate subdomain. This ensures that you can fully test the site under a similar environment as your live site. 
+Slide Rule uses SSH to communicate with your remote web servers securely, and so requires that your ssh public key be uploaded to the server's authorized key file.
 
-Create a subdomain. Below is an example of how you do this for cPanel on a shared hosting site ( Site5 was used for this example)
-
-
-
-
-
-
-##Local Directory Setup
-
-In the directory that  will hold your local dev files(mine is `C:\wamp\www` , do the following:
-
-1. Create a folder with the name of your website, e.g. `C:\wamp\www\ajdruff.com`
-2. Create a subdirectory `home`  , e.g.: `C:\wamp\www\ajdruff.com\home`
-3. Now Clone this project or download and place the contents in a directory called 'slide-rule', so you have the following directory structure or something similar (the folder names may change or you may have a different number of fdirectories)
-
-4. Create a new directory `site-templates` and place the contents of what you want to serve as the basis of your new site. This can be anything from a single index.html file to an entire example WordPress site. 
-
-For this example, we'll clone my bplate-wp project.                
-
-``````````````
-c:\
-wamp
-+---www
-    +---example.com
-        +---home
-        +---slide-rule
-        +---site-templates
-            +---bplate-wp           
-
-````````````````
-
-
-#Local Git Repos
-
-##Create the home repo
-
-    cd "cygdrive/c/wamp/www/example.com/home"
-    git init
-
-##(Optional) Create a new branch for slide-rule
-
-To ensure that we capture any new scripts we create or any modifications to existing scripts.
-
-    cd "cygdrive/c/wamp/www/example.com/home"
-    git checkout -b 'example.com'
-
-
-
-
-
-
-##Netbeans Project
-
-You can run slide-rule scripts directly from within Netbeans. Just include the slide-rule directory in your project files and configure the run environment to use bash. 
-
-Example Setup:
-
-1. Click 'New Project'
-    * Select 'PHP' and 'PHP Application with Existing Sources'
-    * Sources Folder: `C:\www\example.com`
-    * Run As: Local Web Site
-    * Project URL: http://example.com
-2.  Configure the Run Environment
-    * Click 'Run'
-    * Click 'Set Project Configuration'
-    * Click 'Customize'
-    * Click 'New'
-    * Configuration Name: Bash Script
-    * Run as : Script (run in command line)
-    * PHP Interpreter: C:\cygwin\bin\bash.exe   (change this to the path to your local bash shell)
-
-
-##Slide Rule Configuration
-
-1. From the `templates` directory, copy all files that begin with 'config-' to the admin directory
-
-```
-            cp templates/config-* admin/
-```
-
-
-2. Edit the `config`  files you copied into the admin directory and replace values for each variable with values that match your setup. Read the comments in each configuration file for more information.
-
-The files may include (this may not be the exhaustive list)
-
-    - config-bash.conf
-    - config-bash-advanced.conf
-    - config-mysql-dev.conf
-    - config-mysql-live.conf
-    - config-mysql-stage.conf
-    - config-sql.sql
-
-
-
-
-
-##Setup Keys
-
+For more information on creating a public/private key pair, see [GitHub's 'Generating an SSH key' guide](https://help.github.com/articles/generating-an-ssh-key/).
     
     
     #copy the local key to the authorized key file
@@ -190,9 +109,141 @@ where /local/path/to/id_rsa.pub is the local path to your PUBLIC key file
 
 
 
+##Staging Server Setup
+
+The staging site should reside on the same host as your live site but as a separate subdomain. This ensures that you can fully test the site under a similar environment as your live site. 
+
+###Create the subdomain. 
+
+Below is an example of how you do this for cPanel on a shared hosting site ( Site5 was used for this example)
+
+1. Login to your cPanel (SiteAdmin for Site5) for your site
+2. Click 'Domains'
+3. Click 'Subdomains'
+4. For 'Subdomain:' enter 'stage'
+5. For Document Root, make sure it says 'public_html/stage' so the full path is `/home/username/public_html/stage`
+6. Click 'Create'
+
+ 
+###Update the local hosts file or DNS record
+
+Edit your hosts file and/or dns server and add an entry for your staging url. 
+
+Below is an example of what a host entry might look like:
+
+    174.36.179.67 stage.example.com #staging
+
+Its recommended that a remote DNS record isn't used to discourage googlebot spidering.
 
 
-#Run the Setup Scripts
+
+##Development Server Setup
+
+###Create the Development Server Database
+
+Create the MySQL database using the steps appropriate for your particular setup. If you are using WAMP or similar, you can use the `create-database-dev.sh` script in Slide Rule. Before using it, complete the 'Slide Rule Configuration' so that the script has access to the database user and password.
+
+
+###Virtual Host
+
+Configure your Web Server to point your development domain (e.g: example-dev.com) to your web root under the `home` directory. 
+
+For example, if you used the bplate-wp site template with the `public_html` directory under the `home` directory, after running the setup scripts, your full path to the root would be 
+`C:wamp\www\example.com\home\public_html`. 
+
+You can choose your own url, but it should be different from your live server. For example.com , you might want to use `example-dev.com` for your development server
+
+
+See your Dev server's documentation for specifics on how to do this. Its different for UwAmp, MAMP, WAMP, etc.
+    
+
+###Update the local hosts file or DNS record
+
+Edit your hosts file and/or dns server and add an entry for your staging url. 
+
+Below is an example of what a host entry might look like:
+
+    127.0.0.1 example-dev.com #dev server
+
+Its recommended that if your dev server is remote, a remote DNS record isn't used to discourage googlebot spidering.
+
+
+
+
+##Local Directory Setup
+
+In the directory that  will hold your local dev files(mine is `C:\wamp\www`) , do the following:
+
+1. Create a directory with the name of your website, e.g. `C:\wamp\www\example.com`
+2. Create a subdirectory `home` under the `example.com` directory , e.g.: `C:\wamp\www\example.com\home`
+
+
+3. Create a subdirectory `site-templates` under the `example.com` directory  , e.g.: `C:\wamp\www\example.com\site-templates`
+4.  Within the `site-templates` directory, place the files for your new site. This can be anything from a single index.html file to an entire example WordPress site. 
+
+    In this example, I cloned a WordPress installation template project I created, `bplate-wp`. 
+
+        cd c:\wamp\www\example.com\site-templates
+        git clone https://github.com/ajdruff/bplate-wp.git
+
+ 
+
+5. Git clone Slide Rule or download and place the contents in a directory called 'slide-rule'.
+
+
+        cd c:\wamp\www\example.com
+        git clone https://github.com/ajdruff/slide-rule.git
+
+
+6. Your local development directory that contains your project files should now look something like this : 
+
+
+``````````````
+
+c
+wamp
++---www
+    +---example.com
+        +---home
+        +---slide-rule
+        +---site-templates
+            +---bplate-wp           
+
+
+````````````````
+
+
+
+##Slide Rule Configuration
+
+Before running any Slide Rule script, you'll need to tell Slide Rule where your files are located and providing it with your database credentials. Do this by editing its configuration files.
+
+
+1. From the `templates` directory, copy all files that begin with 'config-' to the admin directory
+
+        cp templates/config-* admin/
+
+
+2. Edit the `config`  files you copied into the admin directory and replace values for each variable with values that match your setup. Read the comments in each configuration file for more information.
+
+    The files should include the following (this list may change depending on the version of Slide Rule you are using)
+
+    - config-bash.conf
+    - config-bash-advanced.conf
+    - config-mysql-dev.conf
+    - config-mysql-live.conf
+    - config-mysql-stage.conf
+    - config-sql.sql
+
+
+
+
+
+
+
+
+
+##Slide Rule Setup Script
 
 From a command line, execute setup.sh. 
 
@@ -207,7 +258,13 @@ This will do the following:
 * execute setup-repo-local.sh which:
 * copies the site template files over to 'home'
 
-#Configure WordPress (if applicable)
+
+
+
+
+
+
+##Configure WordPress (if applicable)
 
 
 *`/home/_live/config` directory:*
@@ -222,40 +279,21 @@ This will do the following:
 copy wp-config-db-sample.wp to wp-config-db.php and add your database values for the dev database
 
 
-##Local Dev Server Setup (WAMP)
-
-###Host File
-
-Edit your hosts file and/or dns server and add entries for your staging, production, and development domains. Modify per your particular setup and hosting IP. Below is an example:
-
-    174.36.179.67 example.com #prod
-    174.36.179.67 stage.example.com #staging
-    127.0.0.1 example-dev.com #dev server
-    
 
 
-
-##Virtual Host
-
-Configure your Web Server to point your development domain (e.g: example-dev.com) to your web root under the `home` directory. 
-
-For example, if you used the bplate-wp site template with the `public_html` directory under the `home` directory, after running the setup scripts, your full path to the root would be 
-`C:wamp\www\example.com\home\public_html`. 
-
-You can choose your own url, but it should be different from your live server. For example.com , you might want to use `example-dev.com` for your development server
+##Go Live!
 
 
-See your Dev server's documentation for specifics on how to do this. Its different for UwAmp, MAMP, WAMP, etc.
-
-
-##Live Configuration Files
+###Upload the Production Configuration Files
 
     ./push-config-live.sh
 
-This will push configuration files ( but won't check them in to the git repo ) 
-to the live server. Note that before you do this, WordPress will give database connection errors if you pushed to master before you ran this script.
+This will upload the production server's configuration files ( but won't check them in to the git repo ) 
+to the live server. If you skip this step and try to run WordPress, you'll get database connection errors.
 
-#Go Live!
+>Note that this step only needs to be done on the initial site setup and thereafter only when there are changes to the live site's configuration (ie, database password change)
+
+###Git push to master
 
 Once you've run the setup script, your local `home` directory should be checked out to a    `dev` branch. To go live, you need to fetch the branches from the remote live git repo, merge your dev branch into it, and then push the live branch back to the remote.
 
@@ -268,30 +306,60 @@ Once you've run the setup script, your local `home` directory should be checked 
 Pushing to Master will fire the post receive script which will merge them into the 'live' branch, checkout the live branch. If there were any changes on the server in the meantime, it will commit those changes to an archived branch which you can then fetch and checkout if you want to investigate.
 
 
+##Setup WordPress (If applicable)
+
+If everything went well, you can now visit http://example-dev.com and http://example.com and complete the WordPress setup.
 
 
-**Troubleshooting:**
+##Create a Netbeans Project (Optional)
+
+You can run slide-rule scripts directly from within Netbeans. Just include the slide-rule directory in your project files and configure the run environment to use bash. 
+
+Example Setup:
+
+1. Click 'New Project'
+    * Select 'PHP' and 'PHP Application with Existing Sources'
+    * Sources Folder: `C:\www\example.com`
+    * Run As: Local Web Site
+    * Project URL: http://example.com
+2.  Configure the Run Environment
+    * Click 'Run'
+    * Click 'Set Project Configuration'
+    * Click 'Customize'
+    * Click 'New'
+    * Configuration Name: Bash Script
+    * Run as : Script (run in command line)
+    * PHP Interpreter: C:\cygwin\bin\bash.exe   (change this to the path to your local bash shell)
 
 
 
-* ensure that the database connection works on the remote host. probably you didn't white list your IP.
+
+
+
+
+##Troubleshooting
+
+**Database Connection Errors**
+
+* check that you uploaded the live configuration files.
+* check that there is no IP block for database connection (if you are experiencing connection errors while running a script). cPanel often blacklists all IPs for db administration unless you specifically white list yours.
 * add a step where you setup WordPress or upload a database or something.
 * database connection errors when trying to connect. You didn't configure your database connection files and/or did not run the `push-config-live.sh` script.
 
-#Notes: (clean this up before publication!)
+##Notes:
 
 ##git exclude
 The .git repo exists on the remote server at the root of your server. It excludes every folder except those that are excepted. In the default setup , this is public_html or whatever folder you have configured.
 
 so it looks like this : 
 
-```
-
-#to include a directory, !/relative/path/to/directory/from/git/root/no/ending/slash
-!/public_html
-!/config
-
-```
+    ```
+    
+    #to include a directory, !/relative/path/to/directory/from/git/root/no/ending/slash
+    !/public_html
+    !/config
+    
+    ```
 
 
 
