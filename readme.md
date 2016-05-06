@@ -9,7 +9,7 @@ Andrew Druffner <andrew@nomstock.com>
 
 ##Installation
 
-To install Slide Rule, see the detailed [installation guide](https://github.com/ajdruff/slide-rule/blob/master/docs/getting-started.md).
+To install Slide Rule, see the detailed [installation guide](https://github.com/ajdruff/slide-rule/blob/master/docs/install.md).
 
 ##What is Slide Rule?
 
@@ -37,7 +37,7 @@ It uses Git to manage file changes between your dev and production environments,
 
 Slide Rule installation involves cloning the project, configuring the scripts, and executing a setup script that sets up Git repos on the dev and production server.
 
-For a complete installation walkthrough, see the [installation guide](https://github.com/ajdruff/slide-rule/blob/master/docs/getting-started.md).
+For a complete installation walkthrough, see the [installation guide](https://github.com/ajdruff/slide-rule/blob/master/docs/install.md).
 
 
 **Slide Rule requires:**
